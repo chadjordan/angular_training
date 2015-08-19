@@ -1,0 +1,50 @@
+
+    <ul class="nav nav-pills">
+        <li ng-class="{active: panel.isSelected(1)}">
+            <a href ng-click="panel.selectTab(1)">Description</a>
+        </li>
+        <li ng-class="{active:panel.isSelected(2)}">
+            <a href ng-click="panel.selectTab(2)">Specification</a>
+        </li>
+        <li ng-class="{active: panel.isSelected(3)}">
+            <a href ng-click="panel.selectTab(3)">Reviews</a>
+        </li>
+    </ul>
+    <div class="panel" ng-show="panel.isSelected(1)">
+        <h4>Description</h4>
+        <p>{{ product.description }}</p>
+    </div>
+    <div class="panel" ng-show="panel.isSelected(2)">
+        <h4>Specification</h4>
+        <p>Shine: {{ product.shine }}</p>
+        <p>Price: {{ product.price }}</p>
+        <p>Rarity: {{ product.rarity }}</p>
+        <p>Color: {{ product.color }}</p>
+        <p>Faces: {{ product.faces }}</p>
+    </div>
+    <div class="panel" ng-show="panel.isSelected(3)">
+        <h4>Reviews</h4>
+        <blockquote ng-repeat="review in product.reviews">
+            <b>Stars: {{ review.stars }}</b>
+            {{ review.body }}
+            <cite>by: -{{ review.author }}  on {{ review.createdOn | date }}</cite>
+        </blockquote>
+        <form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewCtrl.addReview(product)" novalidate>
+           <blockqoute>
+               <b>Stars: {{ reviewCtrl.review.stars }}</b>
+               {{ reviewCtrl.review.body }}
+                <cite>by: -{{ reviewCtrl.review.author }}</cite>
+           </blockqoute>
+           <br>
+            <select required ng-model="reviewCtrl.review.stars" ng-options="stars for stars in [5,4,3,2,1]">
+                <option value="">Rate the Product</option>
+            </select>
+            <br>
+            <textarea required ng-model="reviewCtrl.review.body"></textarea>
+            <br>
+            <label>by:</label>
+            <input type="email" required ng-model="reviewCtrl.review.author"/>
+            <br>
+            <input type="submit" class="btn btn-primary pull-right" value="Submit Review" />
+        </form>
+    </div>

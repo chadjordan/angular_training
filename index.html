@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="store">
+    <head>
+        <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.min.css" />
+        <title>Angular Js</title>
+    </head>
+    
+    <body>
+    
+    <ng-include src="'header.html'"></ng-include>
+    
+    
+    
+        <div class="container" ng-controller="StoreController as store">
+           <div class="row" ng-repeat="product in store.products">
+              <div class="clearfix"  ng-hide="product.soldOut"> <!--just put soldOut == true in json file.-->
+                <div class="col-md-7">
+                    <h1> {{ product.name }} </h1>
+                    <h3> {{ product.price | currency}}</h3>
+                    <product-gallery></product-gallery>
+                </div>
+
+                    <div class="col-md-5">
+                        <product-section></product-section>
+                    </div>
+                </div>
+                <hr/>
+            </div>
+        </div>
+    
+    
+<!--    <script src="assets/bootstrap/js/bootstrap.min.js"></script>-->       
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.js"></script>
+        <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.3.js"></script>
+
+        <script src="app.js"></script>
+        
+        <script src="controllers/products.js"></script>
+        <script src="directives/storeDirectives.js"></script>
+        
+        <script src="controllers/modal.js"></script>
+    </body>
+</html>
